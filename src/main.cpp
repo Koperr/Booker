@@ -25,6 +25,7 @@ int main()
     ws.register_resource("/booker", &bh, true);
     std::cout << "Server running on port: 8080\n";
     ws.start(true);
+    //
 }
 
 // curl -X GET http://localhost:8080/booker
