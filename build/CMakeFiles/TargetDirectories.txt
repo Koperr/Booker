@@ -1,0 +1,3 @@
+/home/beza/Desktop/RestLearn/build/CMakeFiles/RestLearn.dir
+/home/beza/Desktop/RestLearn/build/CMakeFiles/edit_cache.dir
+/home/beza/Desktop/RestLearn/build/CMakeFiles/rebuild_cache.dir

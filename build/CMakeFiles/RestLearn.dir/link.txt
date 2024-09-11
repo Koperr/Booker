@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -Werror -std=c++17 CMakeFiles/RestLearn.dir/src/Booker.cpp.o CMakeFiles/RestLearn.dir/src/BookerHandler.cpp.o CMakeFiles/RestLearn.dir/src/main.cpp.o -o /home/beza/Desktop/RestLearn/bin/Linux/RestLearn  /usr/lib/x86_64-linux-gnu/libmicrohttpd.a /usr/local/lib/libhttpserver.a -lmicrohttpd -lhttpserver 
