@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/beza/Desktop/RestLearn/bin/Linux/RestLearn"
-  "/home/beza/Desktop/RestLearn/bin/Linux/RestLearn.pdb"
+  "/Users/beza/Desktop/Booker/bin/Darwin/RestLearn"
+  "/Users/beza/Desktop/Booker/bin/Darwin/RestLearn.pdb"
   "CMakeFiles/RestLearn.dir/src/Booker.cpp.o"
   "CMakeFiles/RestLearn.dir/src/Booker.cpp.o.d"
   "CMakeFiles/RestLearn.dir/src/BookerHandler.cpp.o"

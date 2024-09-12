@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <sstream>
 
 #include <httpserver.hpp>
 #include <nlohmann/json.hpp>

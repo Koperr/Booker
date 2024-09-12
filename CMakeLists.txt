@@ -15,6 +15,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${FullOutputDir}")
 
 add_executable(RestLearn ${source_files})
 
+find_package(GnuTLS REQUIRED)
+
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin") # macOS
     message(STATUS "Configuring for macOS")
     target_include_directories(RestLearn PUBLIC 
@@ -25,7 +27,8 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Darwin") # macOS
         /opt/homebrew/lib)
     target_link_libraries(RestLearn 
         /opt/homebrew/lib/libhttpserver.a 
-        /System/Volumes/Data/opt/homebrew/lib/libmicrohttpd.a)
+        /System/Volumes/Data/opt/homebrew/lib/libmicrohttpd.a
+        GnuTLS::GnuTLS)
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux") # Linux
     message(STATUS "Configuring for Linux")
     target_include_directories(RestLearn PUBLIC 
