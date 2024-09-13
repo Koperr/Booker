@@ -32,6 +32,30 @@ std::shared_ptr<http_response> BookerHandler::render_GET(const http_request &req
     //return std::make_shared<string_response>(response_json.dump(), 200, "application/json");
 }
 
+std::shared_ptr<http_respone> BookerHandler::render_POST(const http_request& req)
+{
+    auto jr = json::parse(req.get_content());
+
+    std::cout << "Recieved POST data: " << jr.dump() << std::endl;
+
+    if(jr["action"] == "add_Continent")
+    {
+        
+    }
+    else if(jr["action"] == "add_Country")
+    {
+
+    }
+    else if(jr["action"] == "add_City")
+    {
+
+    }
+    else
+    {
+        std::cout << "Wrong action: " << jr["action"] << std::endl;
+    }
+}
+
 json BookerHandler::parse_Path(const std::string &path)
 {
     json data;
