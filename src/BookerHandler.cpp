@@ -32,19 +32,37 @@ std::shared_ptr<http_response> BookerHandler::render_GET(const http_request &req
     //return std::make_shared<string_response>(response_json.dump(), 200, "application/json");
 }
 
-std::shared_ptr<http_respone> BookerHandler::render_POST(const http_request& req)
+std::shared_ptr<http_response> BookerHandler::render_POST(const http_request& req)
 {
+    try{
     auto jr = json::parse(req.get_content());
 
     std::cout << "Recieved POST data: " << jr.dump() << std::endl;
 
+
     if(jr["action"] == "add_Continent")
     {
-        
+        for(const auto& c : b->continents)
+        {
+            if (jr["continent"] != c->continent_name)
+                b->add_Continent(jr["name"]);
+            else
+                std::cout << "There is already a continent with that name!\n";
+        }
     }
+
+
     else if(jr["action"] == "add_Country")
     {
-
+        for(const auto& c : b->continents)
+        {
+            if (jr["continent"] != c->continent_name)
+                {
+                    
+                }
+            else
+                std::cout << "There is already a continent with that name!\n";
+        }
     }
     else if(jr["action"] == "add_City")
     {
@@ -53,6 +71,11 @@ std::shared_ptr<http_respone> BookerHandler::render_POST(const http_request& req
     else
     {
         std::cout << "Wrong action: " << jr["action"] << std::endl;
+    }
+    } catch (const std::exception& e)
+    {
+        // Handle error (bad JSON or other issues)
+        return std::make_shared<string_response>("Invalid JSON", 400, "text/plain");
     }
 }
 
