@@ -15,21 +15,23 @@ struct City;
 
 struct City
 {
-    City(const std::string& name)
+    City(const std::string& name, const std::string& content)
     {
         city_name = name;
+        this->content = content;
     }
     //~City();
 
     std::string city_name;
-    int population;
+    std::string content;
 };
 
 struct Country
 {
-    Country(const std::string& name)
+    Country(const std::string& name, const std::string& content)
     {
         country_name = name;
+        this->conent = conent;
     }
     ~Country()
     {
@@ -37,12 +39,13 @@ struct Country
             delete city;
     }
 
-    void add_City(const std::string& name)
+    void add_City(const std::string& name, const std::string& content)
     {
-        cities.push_back(new City(name));
+        cities.push_back(new City(name, content));
     }
 
     std::string country_name;
+    std::string conent;
     std::vector<City*> cities;
 };
 
@@ -51,9 +54,12 @@ struct Continent
     std::string continent_name;
     std::vector<Country*> countries;
 
-    Continent(const std::string& name)
+    std::string content;
+
+    Continent(const std::string& name, const std::string& content)
     {
         continent_name = name;
+        this->content = content;
     }
     ~Continent()
     {
@@ -61,9 +67,9 @@ struct Continent
             delete country;
     }
 
-    void add_Country(const std::string& name)
+    void add_Country(const std::string& name, const std::string& content)
     {
-        countries.push_back(new Country(name));
+        countries.push_back(new Country(name, content));
     }
 };
 
@@ -74,11 +80,11 @@ public:
 
     void print_Continents();
 
-    void add_Continent(const std::string& name);
-    void add_Country(const std::string& continent_name, const std::string& name);
-    void add_City(const std::string& continent_name, const std::string& country_name, const std::string& name);
+    void add_Continent(const std::string& name, const std::string& content);
+    void add_Country(const std::string& continent_name, const std::string& name, const std::string& content);
+    void add_City(const std::string& continent_name, const std::string& country_name, const std::string& name, const std::string& content);
 
     std::vector<Continent*> continents;
-private:
     webserver* ws;
+private:
 };

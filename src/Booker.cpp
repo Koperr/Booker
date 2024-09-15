@@ -14,20 +14,20 @@ void Booker::print_Continents()
     }
 }
 
-void Booker::add_Continent(const std::string& name)
+void Booker::add_Continent(const std::string& name, const std::string& content)
 {
     for(auto& continent : continents)
     {
         if(continent->continent_name == name)
             return;
     }
-    continents.push_back(new Continent(name));
+    continents.push_back(new Continent(name, content));
     
-    std::string endpoint = "/booker/" + name;
+    //std::string endpoint = "/booker/" + name;
     //ws->register_resource(endpoint, bh);
 }
 
-void Booker::add_Country(const std::string& continent_name, const std::string& name)
+void Booker::add_Country(const std::string& continent_name, const std::string& name, const std::string& content)
 {
     for(auto& continent : continents)
     {
@@ -38,13 +38,13 @@ void Booker::add_Country(const std::string& continent_name, const std::string& n
                     if(country->country_name == name)
                         return;
                     else
-                        continent->countries.push_back(new Country(name));
+                        continent->countries.push_back(new Country(name, content));
                 }
             }
     }
 }
 
-void Booker::add_City(const std::string& continent_name, const std::string& country_name, const std::string& name)
+void Booker::add_City(const std::string& continent_name, const std::string& country_name, const std::string& name, const std::string& content)
 {
     for(auto& continent : continents)
     {
@@ -59,7 +59,7 @@ void Booker::add_City(const std::string& continent_name, const std::string& coun
                             if(city->city_name == name)
                                 return;
                             else
-                                country->cities.push_back(new City(name));
+                                country->cities.push_back(new City(name, content));
                         }
                     }
                 }

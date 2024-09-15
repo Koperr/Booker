@@ -27,9 +27,51 @@ std::shared_ptr<http_response> BookerHandler::render_GET(const http_request &req
     response += "Continent = [" + continent + "]\n" +
             "Country = [" + country + "]\n" +
             "City = [" + city + "]\n";
+    
+
+
+    //std::string list_of_continents;
+    for(const auto& i : b->continents)
+    {
+        //list_of_continents += e->continent_name;
+        if(jr["continent"] == i->continent_name)
+        {
+            if(jr["country"] != "")
+            {
+                std::cout << "contains country\n";
+                for(const auto& j : i->countries)
+                {
+                    if(jr["country"] == j->country_name)
+                    {
+                        if(jr["city"] != "")
+                        {
+                            for(const auto& k : j->cities)
+                            {
+                                if(jr["city"] == k->city_name)
+                                {
+                                    return std::make_shared<string_response>(k->content);
+                                }
+                                //else
+                                //    return std::make_shared<string_response>("404 Not Found", 404, "text/plain");
+                            }
+                        }
+                        else
+                            return std::make_shared<string_response>(j->conent);
+                    }
+                    //else
+                    //    return std::make_shared<string_response>("404 Not Found", 404, "text/plain");
+                }
+            }
+            else
+                return std::make_shared<string_response>(i->content);
+        }
+    }
+    std::cout << "no i dupa\n";
+    return std::make_shared<string_response>("404 Not Found", 404, "text/plain");
 
     return std::make_shared<string_response>(response);
     //return std::make_shared<string_response>(response_json.dump(), 200, "application/json");
+    //return std::make_shared<string_response>(list_of_continents, 200);
 }
 
 std::shared_ptr<http_response> BookerHandler::render_POST(const http_request& req)
@@ -44,8 +86,12 @@ std::shared_ptr<http_response> BookerHandler::render_POST(const http_request& re
     {
         for(const auto& c : b->continents)
         {
-            if (jr["continent"] != c->continent_name)
-                b->add_Continent(jr["name"]);
+            if (jr["name"] != c->continent_name)
+            {
+                b->add_Continent(jr["name"], jr["content"]);
+                std::string endpoint = "/booker/" + std::string(jr["continent"]);
+                b->ws->register_resource(endpoint, this);
+            }
             else
                 std::cout << "There is already a continent with that name!\n";
         }
@@ -77,6 +123,8 @@ std::shared_ptr<http_response> BookerHandler::render_POST(const http_request& re
         // Handle error (bad JSON or other issues)
         return std::make_shared<string_response>("Invalid JSON", 400, "text/plain");
     }
+
+    return std::make_shared<string_response>("response");
 }
 
 json BookerHandler::parse_Path(const std::string &path)
